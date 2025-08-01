@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="https://www.dropbox.com/scl/fi/7whto8pv6klinnudsuh0y/LogoLavanderia-1.png?rlkey=z27kbxnocromvenebltgwwj4o&raw=1" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;700&family=Mooli:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1D3CB9;
+            --secondary-blue: #2543BA;
+            --light-blue: #1F84DA;
+            --dark-blue: #1577CA;
+            --white: #FFFFFF;
+            --black: #000000;
+            --radius-sm: 20px;
+            --radius-md: 25px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat Alternates', sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+            background-color: #003d99;
+        }
+
+       
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        .register-header {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .register-header h1 {
+            font-size: 2.8rem;
+            background: white;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            
+        }
+
+        .register-header p {
+            font-size: 1.2rem;
+            color: white;
+            max-width: 700px;
+            margin: 0 auto;
+            
+        }
+
+        /* Formulário */
+        .register-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem 0 5rem;
+        }
+
+        .register-card {
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 500px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(31, 132, 218, 0.2);
+            box-shadow: 0 0 10px #ffffff60, 0 0 20px #ffffff60, 0 0 10px #ffffff60;
+        }
+
+        .register-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(31, 132, 218, 0.2);
+            box-shadow: 0 0 10px #ffffff60, 0 0 20px #ffffff60, 0 0 10px #ffffff60;
+        }
+
+        /* Formulário */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(31, 132, 218, 0.3);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--light-blue);
+            box-shadow: 0 0 10px rgba(31, 132, 218, 0.8);
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light-blue);
+        }
+
+        /* Botão */
+        .btn-register {
+            display: inline-block;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(31, 132, 218, 0.4);
+        }
+
+        /* Progresso */
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: rgba(31, 132, 218, 0.3);
+            z-index: 0;
+        }
+
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--white);
+            border: 2px solid rgba(31, 132, 218, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step.active {
+            background-color: var(--light-blue);
+            color: var(--white);
+            border-color: var(--light-blue);
+        }
+
+        .step.completed {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border-color: var(--primary-blue);
+        }
+
+        /* Sucesso */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-message i {
+            font-size: 4rem;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .register-header h1 {
+                font-size: 2rem;
+            }
+            
+            .register-header p {
+                font-size: 1rem;
+            }
+            
+          
+        }
+
+        /* Animações */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(calc(100vh + 20px)) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <div class="container">
+        <header class="register-header">
+            <h1>Junte-se à Revolução da Lavanderia</h1>
+            <p>Cadastre-se agora e tenha acesso a benefícios exclusivos, descontos especiais e a praticidade que só a Lavanderia Express pode oferecer.</p>
+        </header>
+
+        <div class="register-container">
+            <div class="register-card">
+                <div class="progress-steps">
+                    <div class="step completed"><i class="fas fa-check"></i></div>
+                    <div class="step active">2</div>
+                    <div class="step">3</div>
+                </div>
+
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="name">Nome Completo</label>
+                        <div class="input-icon">
+                            <input type="text" id="name" class="form-control" placeholder="Digite seu nome completo" required>
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <div class="input-icon">
+                            <input type="email" id="email" class="form-control" placeholder="seu@email.com" required>
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Telefone</label>
+                        <div class="input-icon">
+                            <input type="tel" id="phone" class="form-control" placeholder="(00) 00000-0000" required>
+                            <i class="fas fa-phone"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <div class="input-icon">
+                            <input type="password" id="password" class="form-control" placeholder="Crie uma senha segura" required>
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm-password">Confirme sua Senha</label>
+                        <div class="input-icon">
+                            <input type="password" id="confirm-password" class="form-control" placeholder="Digite a senha novamente" required>
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn-register pulse-animation">
+                            <i class="fas fa-rocket"></i> CRIAR CONTA PREMIUM
+                        </button>
+                    </div>
+                </form>
+
+                <div class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <h2>Cadastro Concluído com Sucesso!</h2>
+                    <p>Bem-vindo à Lavanderia Express. Seu cadastro foi realizado e em breve você receberá um e-mail com seus benefícios exclusivos.</p>
+                    <a href="principal.html" class="btn-register">ACESSAR MINHA CONTA</a>
+                </div>
+            </div>
+    <script>
+       
+        // Máscara para telefone
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.substring(0, 11);
+            
+            if (value.length > 0) {
+                value = '(' + value;
+                if (value.length > 3) value = value.substring(0, 3) + ') ' + value.substring(3);
+                if (value.length > 10) value = value.substring(0, 10) + '-' + value.substring(10);
+            }
+            
+            e.target.value = value;
+        });
+
+        // Processamento do formulário
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const userData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value
+            };
+            
+            localStorage.setItem('lavanderiaUser', JSON.stringify(userData));
+            
+            this.style.display = 'none';
+            document.querySelector('.success-message').style.display = 'block';
+            
+            // Animação de confete
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.innerHTML = '<i class="fas fa-star" style="color: #FFD700; position: absolute; font-size: 10px;"></i>';
+                    confetti.style.position = 'absolute';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-20px';
+                    confetti.style.animation = 'fall ' + (Math.random() * 3 + 2) + 's linear forwards';
+                    document.querySelector('.register-card').appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 100);
+            }
+            
+            const firstName = userData.name.split(' ')[0];
+            document.querySelector('.success-message h2').textContent = `Cadastro Concluído, ${firstName}!`;
+        });
+    </script>
+</body>
+</html>

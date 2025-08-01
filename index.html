@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavanderia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Adicione isso no <head> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="https://www.dropbox.com/scl/fi/7whto8pv6klinnudsuh0y/LogoLavanderia-1.png?rlkey=z27kbxnocromvenebltgwwj4o&raw=1" type="image/png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;700&family=Mooli:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET E VARIÁVEIS ===== */
+        :root {
+            --primary-blue: #1D3CB9;
+            --secondary-blue: #2543BA;
+            --light-blue: #1F84DA;
+            --dark-blue: #1577CA;
+            --white: #FFFFFF;
+            --black: #000000;
+            --radius-sm: 20px;
+            --radius-md: 25px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat Alternates', sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+            overflow-x: hidden;
+        }
+         body.mapaText {
+            font-family: 'Montserrat Alternates', sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+            overflow-x: hidden;
+        }
+
+        /* ===== COMPONENTES REUTILIZÁVEIS ===== */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 1.2rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-blue);
+            color: var(--white);
+             
+        }
+
+        .btn-secundaria {
+            background-color: var(--white);
+            color: var(--secondary-blue);
+            box-shadow: 0 0 10px #ffffff60, 0 0 20px #ffffff60, 0 0 10px #ffffff60;
+        }
+        .btn-secundaria:hover {
+            background-color: var(--white);
+            color: var(--secondary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px #ffffff60, 0 0 20px #ffffff60, 0 0 10px #ffffff60;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+            box-shadow: 0 0 10px #2543ba99, 0 0 20px #2543ba99, 0 0 10px #2543ba99;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            color: #1d3cb9;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .section-title2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 140px;
+            width: 100%;
+            height: 100%;
+            background: url("imagens/fundo4k.png") center/cover no-repeat;
+            z-index: -1;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+        }
+
+        .logo {
+            width: 80px;
+            height: auto;
+            left: 120px;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: calc(100% - 80px);
+            padding: 0 2rem;
+        }
+
+        .header-text {
+            position: relative;
+            max-width: 600px;
+            left: 60px;
+            margin-bottom: 15rem;
+        }
+
+        .header-title {
+            font-size: 4.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .header-subtitle {
+            font-size: 1.25rem;
+            color: var(--secondary-blue);
+            margin-bottom: 2rem;
+        }
+
+        .header-image {
+            position: absolute;
+            right: 14%;
+            bottom: 10%;
+            width: 30%;
+            max-width: 400px;
+            z-index: 1;
+        }
+
+        /* ===== SEÇÕES ===== */
+        section {
+            padding: 4rem 0;
+        }
+
+        /* Serviços */
+        .services {
+            background-color: var(--white);
+        }
+
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow);
+        }
+
+        .service-card h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card ul {
+            list-style: none;
+        }
+
+        .service-card li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .service-card li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--white);
+        }
+
+        /* Como Funciona */
+        .how-it-works {
+            background-color: #1d3cb9;
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--light-blue);
+        }
+
+        /* Planos */
+        .plans {
+            background-color: var(--white);
+        }
+
+        .plans-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .plan-card {
+            background-color: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--light-blue);
+        }
+
+        .plan-card.featured {
+            border-color: var(--dark-blue);
+            background-color: var(--dark-blue);
+            color: var(--white);
+
+        }
+
+        .plan-card.featured .btn {
+            background-color: var(--white);
+            color: var(--dark-blue);
+        
+        }
+
+          .plan-card.featured .btn:hover {
+            background-color: var(--white);
+            color: var(--dark-blue);
+            transform: translateY(-2px);
+             box-shadow: 0 0 10px #ffffff8f, 0 0 20px #ffffff8f, 0 0 10px #ffffff8f;
+        }
+
+        .plan-title {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--light-blue);
+        }
+
+        .plan-card.featured .plan-title {
+            color: var(--white);
+        }
+
+        .plan-price {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .plan-features {
+            margin-bottom: 2rem;
+        }
+
+        /* Localizações */
+        .locations {
+            background-color: var(--white);
+        }
+
+        .map-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .map-image {
+            position: relative;
+            width: 90%;
+            height: auto;
+            left: 10%;
+            border-radius: var(--radius-sm);
+        }
+
+        .location-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .location-features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .feature-icon {
+            margin-right: 0.5rem;
+            color: var(--light-blue);
+        }
+
+        
+        /* Footer */
+        .dashboard-footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(31, 132, 218, 0.2);
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: var(--light-blue);
+            margin: 0 0.5rem;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .footer-logo {
+            width: 120px;
+            margin-bottom: 1.5rem;
+        }
+
+        .copyright {
+            font-size: 0.875rem;
+        }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (min-width: 768px) {
+            .map-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 576px) {
+            .location-features {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .header-title {
+                font-size: 2.5rem;
+            }
+           
+            .header-image {
+                width: 40%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                height: auto;
+                min-height: auto;
+                padding-bottom: 2rem;
+            }
+           
+            .header-content {
+                padding-top: 4rem;
+                height: auto;
+            }
+           
+            .header-title {
+                font-size: 2rem;
+            }
+           
+            .header-image {
+                position: relative;
+                width: 51%;
+                margin: 2rem auto 0;
+                right: auto;
+                bottom: auto;
+            }
+           
+            .section-title {
+                font-size: 2rem;
+            }
+            .section-title2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 45px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+           
+            .header-title {
+                font-size: 1.75rem;
+            }
+           
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .section-title2 {
+                font-size: 1.5rem;
+            }
+           
+            .btn {
+                padding: 0.75rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-bg"></div>
+        <div class="header-overlay"></div>
+       
+        <nav class="navbar">
+           <img src="imagens/logo4k.png" alt="Logo Lavanderia" class="logo">
+            <a href="cadastro.html" class="btn btn-secundaria">Cadastrar</a>
+        </nav>
+       
+        <div class="header-content">
+            <div class="header-text">
+                <h1 class="header-title">Lavagem com Qualidade e Praticidade</h1>
+                <p class="header-subtitle">Sua roupa limpa, cheirosa e pronta no tempo certo</p>
+                <a href="cadastro.html" class="btn btn-primary">Cadastre-se</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Serviços -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Nossos Serviços</h2>
+           
+            <div class="services-container">
+                <div class="service-card">
+                    <h3>Serviços</h3>
+                    <ul>
+                        <li>Autosserviço fácil e rápido</li>
+                        <li>Ambiente seguro e monitorado 24h</li>
+                        <li>Roupas limpas em menos de 1h</li>
+                        <li>Aberta todos os dias</li>
+                        <li>Preços acessíveis e justos</li>
+                        <li>Local mais próximo de você</li>
+                    </ul>
+                </div>
+               
+                <div class="service-card">
+                    <h3>Plano Mensal</h3>
+                    <ul>
+                        <li>Até 8 lavagens por mês (1-2 por semana)</li>
+                        <li>Secagem inclusa</li>
+                        <li>10% de desconto em lavagens extras</li>
+                        <li>Cupons promocionais todo mês</li>
+                        <li>Preços acessíveis e justos</li>
+                        <li>Prioridade em horários movimentados</li>
+                    </ul>
+                </div>
+               
+                <div class="service-card">
+                    <h3>Plano Anual</h3>
+                    <ul>
+                        <li>Até 96 lavagens por ano</li>
+                        <li>Secagem inclusa</li>
+                        <li>1 lavagem extra grátis a cada mês</li>
+                        <li>15% de desconto em serviços adicionais</li>
+                        <li>Acesso antecipado a promoções</li>
+                        <li>Brinde especial de boas-vindas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Funciona -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title2">Um novo jeito de lavar roupa</h2>
+           
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: rgb(255, 255, 255); font-weight: 700;">
+                Chega de depender do clima ou da sua máquina quebrar em casa. Aqui, você lava e seca tudo com eficiência em menos de uma hora. E o melhor: pagando pouco e com total liberdade.
+            </p>
+           
+            <div class="steps-container">
+                <div class="step">
+                    <div style="color:white;" class="step-icon">1</div>
+                    <h3 style="color: white;">Cadastre-se</h3>
+                    <p style="color: white;">Faça seu cadastro gratuito e comece a usar nossos serviços</p>
+                </div>
+               
+                <div class="step">
+                    <div style="color:white;" class="step-icon">2</div>
+                    <h3 style="color:white;">Escolha o Plano</h3>
+                    <p style="color:white;">Selecione o plano que melhor atende suas necessidades</p>
+                </div>
+               
+                <div class="step">
+                    <div style="color:white;" class="step-icon">3</div>
+                    <h3 style="color:white;">Lave e Seque</h3>
+                    <p style="color:white;">Use nossas máquinas modernas e eficientes</p>
+                </div>
+               
+                <div class="step">
+                    <div style="color:white;" class="step-icon">4</div>
+                    <h3 style="color:white;">Retire suas Roupas</h3>
+                    <p style="color:white;">Em menos de 1h suas roupas estarão limpas e secas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cadastro e Promoções -->
+    <section class="promotions" id="cadastro">
+        <div class="container">
+            <h2 class="section-title">Cadastro e Promoções</h2>
+           
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p style="color: var(--light-blue); font-weight: 700; margin-bottom: 2rem;">
+                    Faça seu cadastro e ganhe benefícios! Cadastre-se gratuitamente e comece a receber cupons de desconto, promoções exclusivas e novidades da nossa lavanderia. É rápido, seguro e vale a pena!
+                </p>
+               
+                <a href="cadastro.html" class="btn btn-primary">Cadastre-se Agora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Localizações -->
+    <section class="locations">
+        <div class="container">
+            <h2 class="section-title">Nossas Unidades Pelo Brasil</h2>
+           
+            <div class="map-container">
+                <img src="https://www.dropbox.com/scl/fi/z86wikmoqn9qwjjgtuihc/mapa.gif?rlkey=py9qrttxbbseph2kevxe5zzk5&raw=1" alt="Mapa de localizações" class="map-image">
+               
+                <div class="location-info">
+                    <div class="location-features">
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Ambientes limpos, seguros e bem localizados.</span>
+                        </div>
+                       
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Fácil de usar: chegou, lavou, secou e pronto!</span>
+                        </div>
+                       
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Temos unidades mais perto de você!</span>
+                        </div>
+                       
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Estamos presentes em várias regiões do país.</span>
+                        </div>
+                       
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Todas as unidades são automatizadas e de autosserviço.</span>
+                        </div>
+                       
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Mesma qualidade e praticidade em qualquer unidade.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planos -->
+    <section class="plans">
+        <div class="container">
+            <h2 class="section-title">Nossos Planos</h2>
+           
+            <div class="plans-container">
+                <div class="plan-card">
+                    <h3 class="plan-title">Plano Básico</h3>
+                    <div class="plan-price">R$ 49,90/mês</div>
+                    <ul class="plan-features">
+                        <li>4 lavagens por mês</li>
+                        <li>Secagem inclusa</li>
+                        <li>5% de desconto em lavagens extras</li>
+                        <li>Acesso às unidades</li>
+                    </ul>
+                    <a href="cadastro.html" class="btn btn-primary">Assinar</a>
+                </div>
+               
+                <div class="plan-card featured">
+                    <h3 class="plan-title">Plano Mensal</h3>
+                    <div class="plan-price">R$ 89,90/mês</div>
+                    <ul class="plan-features">
+                        <li>8 lavagens por mês</li>
+                        <li>Secagem inclusa</li>
+                        <li>10% de desconto em lavagens extras</li>
+                        <li>Cupons mensais</li>
+                        <li>Prioridade em horários</li>
+                    </ul>
+                    <a href="cadastro.html" class="btn">Assinar</a>
+                </div>
+               
+                <div class="plan-card">
+                    <h3 class="plan-title">Plano Anual</h3>
+                    <div class="plan-price">R$ 899,90/ano</div>
+                    <ul class="plan-features">
+                        <li>96 lavagens por ano</li>
+                        <li>Secagem inclusa</li>
+                        <li>1 lavagem extra grátis/mês</li>
+                        <li>15% de desconto em extras</li>
+                        <li>Acesso antecipado a promoções</li>
+                        <li>Brinde de boas-vindas</li>
+                    </ul>
+                    <a href="cadastro.html" class="btn btn-primary">Assinar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="dashboard-footer">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/joaog_rsantos/"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>© 2025 Lavanderia - Todos os direitos reservados</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+                <a href="#" style="color: var(--light-blue); text-decoration: none;">Termos de Uso</a> | 
+                <a href="#" style="color: var(--light-blue); text-decoration: none;">Política de Privacidade</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

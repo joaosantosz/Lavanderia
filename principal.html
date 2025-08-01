@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavanderia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="https://www.dropbox.com/scl/fi/7whto8pv6klinnudsuh0y/LogoLavanderia-1.png?rlkey=z27kbxnocromvenebltgwwj4o&raw=1" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;700&family=Mooli:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1D3CB9;
+            --secondary-blue: #2543BA;
+            --light-blue: #1F84DA;
+            --dark-blue: #1577CA;
+            --white: #FFFFFF;
+            --black: #000000;
+            --radius-sm: 20px;
+            --radius-md: 25px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --gradient-blue: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat Alternates', sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+            background-color: #003d99;
+        }
+
+    
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(31, 132, 218, 0.2);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 60px;
+            height: auto;
+            margin-right: 1rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: white;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            margin-right: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.1);
+        }
+
+        .user-name {
+            font-weight: 700;
+            color: white;
+            margin-right: 1rem;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Banner */
+        .welcome-banner {
+            background: var(--gradient-blue);
+            color: var(--white);
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .welcome-text h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-text p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .welcome-badge {
+            background-color: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Dashboard */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        .feature-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-blue);
+            border-radius: 4px;
+            width: 65%;
+        }
+
+        /* Botões */
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.5rem;
+            background: var(--gradient-blue);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Seções */
+        .section-title {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--light-blue);
+            margin-bottom: 1rem;
+        }
+
+        .service-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .service-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--light-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* Promoções */
+        .promo-section {
+            background: linear-gradient(185deg, rgba(31, 131, 218, 0), rgba(255, 255, 255, 0));
+            padding: 2rem;
+            border-radius: var(--radius-sm);
+            margin: 3rem 0;
+        }
+
+        .promo-card {
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--light-blue);
+        }
+
+        /* Footer */
+        .Redes-sociais {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(31, 132, 218, 0.2);
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .welcome-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .welcome-text h1 {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Animações */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="main-container">
+        <header class="dashboard-header">
+            <div class="logo-container">
+                <img src="imagens/logo4k.png" alt="Logo Lavanderia" class="logo">
+                <span class="logo-text">Lavanderia</span>
+            </div>
+            
+            <div class="user-menu">
+                <span class="user-name">Olá, João Silva!</span>
+                <div class="user-avatar">JS</div>
+                <button class="logout-btn">Sair <i class="fas fa-sign-out-alt"></i></button>
+            </div>
+        </header>
+
+        <section class="welcome-banner">
+            <div class="welcome-content">
+                <div class="welcome-text">
+                    <h1>Bem-vindo à sua Área Premium</h1>
+                    <p>Aproveite todos os benefícios exclusivos do seu plano</p>
+                </div>
+                <div class="welcome-badge">
+                    <i class="fas fa-crown"></i>
+                    <span>PLANO PREMIUM</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="dashboard-grid">
+            <div class="feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <i class="fas fa-washing-machine"></i>
+                    </div>
+                    <h3 class="feature-title">Lavagens Disponíveis</h3>
+                </div>
+                <div class="feature-value">8/8</div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <button class="action-btn">
+                    <i class="fas fa-plus"></i> Agendar Lavagem
+                </button>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="feature-title">Seus Pontos</h3>
+                </div>
+                <div class="feature-value">1.250</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 42%;"></div>
+                </div>
+                <button class="action-btn">
+                    <i class="fas fa-gift"></i> Resgatar Prêmios
+                </button>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3 class="feature-title">Seus Descontos</h3>
+                </div>
+                <div class="feature-value">3</div>
+                <button class="action-btn">
+                    <i class="fas fa-tag"></i> Ver Todos os Cupons
+                </button>
+            </div>
+        </div>
+
+        <section class="services-section">
+            <h2 class="section-title">Nossos Serviços</h2>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tshirt float-animation"></i>
+                    </div>
+                    <h3 class="service-name">Lavagem Básica</h3>
+                    <div class="service-price">R$ 25,90</div>
+                    <button class="action-btn">
+                        <i class="fas fa-calendar-alt"></i>  Agendar
+                    </button>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-wind float-animation"></i>
+                    </div>
+                    <h3 class="service-name">Lavagem + Secagem</h3>
+                    <div class="service-price">R$ 39,90</div>
+                    <button class="action-btn">
+                        <i class="fas fa-calendar-alt"></i>  Agendar
+                    </button>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-spa float-animation"></i>
+                    </div>
+                    <h3 class="service-name">Lavagem Premium</h3>
+                    <div class="service-price">R$ 49,90</div>
+                    <button class="action-btn">
+                        <i class="fas fa-calendar-alt"></i> Agendar
+                    </button>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-broom float-animation"></i>
+                    </div>
+                    <h3 class="service-name">Limpeza a Seco</h3>
+                    <div class="service-price">R$ 59,90</div>
+                    <button class="action-btn">
+                        <i class="fas fa-calendar-alt"></i> Agendar
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="promo-section">
+            <h2 class="section-title">Promoções Exclusivas</h2>
+            
+            <div class="promo-card">
+                <h3 class="promo-title">2ª Lavagem Grátis</h3>
+                <p class="promo-description">Leve 2 peças e pague apenas 1.</p>
+            </div>
+            
+            <button class="action-btn" style="margin-top: 1rem;">
+                <i class="fas fa-bell"></i> Receber Alertas de Promoções
+            </button>
+        </section>
+
+        <footer class="Redes-sociais">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/joaog_rsantos/"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>© 2025 Lavanderia - Todos os direitos reservados</p>
+        </footer>
+    </div>
+
+  
+    <script>
+        
+        // Carrega dados do usuário
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = JSON.parse(localStorage.getItem('lavanderiaUser'));
+            
+            if (userData) {
+                document.querySelector('.user-name').textContent = `Olá, ${userData.name}!`;
+                
+                const initials = userData.name.split(' ')
+                                  .map(n => n[0])
+                                  .join('')
+                                  .toUpperCase();
+                document.querySelector('.user-avatar').textContent = initials;
+            }
+        });
+
+        // Logout
+        document.querySelector('.logout-btn').addEventListener('click', function() {
+            if(confirm('Deseja realmente sair da sua conta?')) {
+                window.location.href = 'cadastro.html';
+            }
+        });
+
+        // Notificação
+        setTimeout(() => {
+            const notification = document.createElement('div');
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.backgroundColor = 'var(--primary-blue)';
+            notification.style.color = 'white';
+            notification.style.padding = '15px 20px';
+            notification.style.borderRadius = 'var(--radius-sm)';
+            notification.style.boxShadow = 'var(--shadow)';
+            notification.style.zIndex = '1000';
+            notification.innerHTML = `
+                <i class="fas fa-bell" style="margin-right: 10px;"></i>
+                <span>Novo cupom de desconto disponível!</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }, 3000);
+    </script>
+</body>
+</html>
